@@ -656,18 +656,13 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.downScroll)
 			strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
-
-		healthBarGroup = new FlxSpriteGroup();
-		healthBarGroup.visible = !cpuControlled;
-		healthBarGroup.antialiasing = true;
-		add(healthBarGroup);
+		
+		blackBars = new FlxSprite(0, 0).loadGraphic(Paths.image('hud/hud bar'));
+		add(blackBars);
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 
 		updateTime = showTime;
-		
-		blackBars = new FlxSprite(0, 0).loadGraphic(Paths.image('hud/hud bar'));
-		add(blackBars);
 
 		timeBar = new FlxBar(230, 730, LEFT_TO_RIGHT, 1050, 7, this,
 			'songPercent', 0, 1);
@@ -677,6 +672,11 @@ class PlayState extends MusicBeatState
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
 		add(timeBar);
+		
+		healthBarGroup = new FlxSpriteGroup();
+		healthBarGroup.visible = !cpuControlled;
+		healthBarGroup.antialiasing = true;
+		add(healthBarGroup);
 
 		healthBar = new HealthBar(800, (ClientPrefs.downScroll ? 80 : FlxG.height * 0.81) , Paths.image("hud/backbar"), Paths.image("hud/frontbar"), this, 'displayedHealth', 0, 2);
 		healthBar.scrollFactor.set();
@@ -686,7 +686,7 @@ class PlayState extends MusicBeatState
 		vinyl = new FlxSprite(-200, 720).loadGraphic(Paths.image('hud/vinylrecfinal'));
 		add(vinyl);
 		vinyl.antialiasing = true;
-
+		
 		switch (SONG.song.toLowerCase()) // faggot
 		{
 			case 'kaseyfunk':
