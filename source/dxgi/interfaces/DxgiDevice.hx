@@ -1,4 +1,4 @@
-#if D3D
+#if windows
 package dxgi.interfaces;
 
 #if windows

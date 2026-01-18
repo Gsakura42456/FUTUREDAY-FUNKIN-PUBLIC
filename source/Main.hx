@@ -15,23 +15,29 @@ import openfl.display.StageScaleMode;
 import flixel.system.scaleModes.FixedScaleAdjustSizeScaleMode;
 import openfl.events.Event;
 import states.menus.*;
+import haxe.io.Path;
+#if android
+import android.content.Context;
+import android.os.Build;
+#end
 
 using StringTools;
 
 // crash handler stuff
 #if CRASH_HANDLER
 import haxe.CallStack;
-import haxe.io.Path;
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
+#if desktop
 import util.Discord.DiscordClient;
+#end
 #end
 
 // cumming and jizzing
-#if D3D
+#if windows
 @:buildXml('<include name="../../../../source/d3d/DirectXTK/builder.xml" />')
 #end
 #if debug
@@ -62,6 +68,10 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+
+		#if android
+		Sys.setCwd(Path.addTrailingSlaph(Context.getExternalFilesDir()));
+		#end
 
 		if (stage != null)
 		{

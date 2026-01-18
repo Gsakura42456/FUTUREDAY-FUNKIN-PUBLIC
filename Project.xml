@@ -41,7 +41,7 @@
 	<classpath name="source" />
 	
 	<define name="VIDEOS_ALLOWED" if="web || windows || cpp" unless="32bits || hl"/>
-	<define name="DISCORD_ALLOWED" if="cpp"/> <!--fatboy slim is fucking in heaven-->
+	<define name="DISCORD_ALLOWED" if="desktop"/> <!--fatboy slim is fucking in heaven-->
 	<define name="CRASH_HANDLER" if="cpp" />
 
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
@@ -105,9 +105,12 @@
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
+	
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 
+	<certificate path="key.keystore" password="psychengine" alias="psychport" alias-password="pasychengine" if="android" unless="debug" />
+	
 	<!--Allow working memory greater than 1 Gig-->
 	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 	

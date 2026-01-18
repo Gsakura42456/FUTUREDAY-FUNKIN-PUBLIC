@@ -1,4 +1,4 @@
-#if D3D
+#if windows
 package dxgi.structures;
 
 import haxe.io.Bytes;
