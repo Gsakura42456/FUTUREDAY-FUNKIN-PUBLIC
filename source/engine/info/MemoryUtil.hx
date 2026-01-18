@@ -1,6 +1,6 @@
 package engine.info;
 
-#if cpp
+#if windows
 import cpp.CPPInterface;
 import cpp.vm.Gc;
 #elseif hl
@@ -73,7 +73,7 @@ class MemoryUtil
 
 	public static function getTotalMem():Float
 	{
-		#if cpp
+		#if windows
 		return CPPInterface.getRam();
 		#elseif mac
 		return funkin.backend.utils.native.Mac.getTotalRam();

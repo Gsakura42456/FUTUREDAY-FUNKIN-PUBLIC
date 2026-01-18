@@ -70,7 +70,7 @@ class Main extends Sprite
 		super();
 
 		#if android
-		Sys.setCwd(Path.addTrailingSlaph(Context.getExternalFilesDir()));
+		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
 		#end
 
 		if (stage != null)

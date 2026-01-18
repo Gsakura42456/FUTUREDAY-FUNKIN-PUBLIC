@@ -5,7 +5,7 @@ import states.menus.StartState.StartStateIntro;
 import engine.script.FunkinHScript;
 import engine.gc.GarbageCollector;
 import states.menus.StartupState;
-#if cpp
+#if windows
 import cpp.CPPInterface;
 #end
 import data.ClientPrefs;
@@ -20,7 +20,9 @@ import shaders.ShaderUtil;
 import states.menus.StoryMenuState;
 import states.menus.TitleState;
 import util.CoolUtil;
+#if desktop
 import util.Discord.DiscordClient;
+#end
 
 class Init extends FlxState
 {
@@ -34,7 +36,7 @@ class Init extends FlxState
 	{
 		super.create();
 
-		#if cpp
+		#if windows
 		CPPInterface.darkMode();
 		#end
 
