@@ -1,6 +1,6 @@
 package engine.info;
 
-#if windows
+#if cpp
 import cpp.CPPInterface;
 import cpp.vm.Gc;
 #elseif hl
