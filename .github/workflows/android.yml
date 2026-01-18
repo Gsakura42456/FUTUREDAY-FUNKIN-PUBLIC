@@ -44,7 +44,7 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install hxjsonast 1.1.0
           haxelib install hscript
-          haxelib git flanimate https://github.com/MayLastPlays-Stuff/flxanimate-psych
+          haxelib git flanimate https://github.com/MaysLastPlays-Stuff/flxanimate-psych.git
           haxelib git linc_directx https://github.com/Zoardedz/linc_directx
           haxelib list
       
