@@ -380,6 +380,50 @@ class Controls extends FlxActionSet
 	}
 	#end
 
+	#if mobile
+public var trackedInputsUI:Array<FlxActionInput> = [];
+public var trackedInputsNOTES:Array<FlxActionInput> = [];
+
+public function addButtonNOTES(action:FlxActionDigital, button:FlxButton, state:FlxInputState)
+{
+	var input:FlxActionInputDigitalIFlxInput = new FlxActionInputDigitalIFlxInput(button, state);
+	trackedInputsNOTES.push(input);
+	action.add(input);
+}
+
+public function addButtonUI(action:FlxActionDigital, button:FlxButton, state:FlxInputState)
+{
+	var input:FlxActionInputDigitalIFlxInput = new FlxActionInputDigitalIFlxInput(button, state);
+	trackedInputsUI.push(input);
+	action.add(input);
+}
+
+public function setHitBox(Hitbox:FlxHitbox)
+{
+	inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, Hitbox.buttons[1], state));
+	inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, Hitbox.buttons[0], state));
+	inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, Hitbox.buttons[2], state));
+	inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, Hitbox.buttons[3], state));
+}
+
+public function removeVirtualControlsInput(Tinputs:Array<FlxActionInput>)
+{
+	for (action in this.digitalActions)
+	{
+		var i = action.inputs.length;
+		while (i-- > 0)
+		{
+			var x = Tinputs.length;
+			while (x-- > 0)
+			{
+				if (Tinputs[x] == action.inputs[i])
+					action.remove(action.inputs[i]);
+			}
+		}
+	}
+}
+#end
+
 	override function update()
 	{
 		super.update();
@@ -579,13 +623,12 @@ class Controls extends FlxActionSet
 	 * Sets all actions that pertain to the binder to trigger when the supplied keys are used.
 	 * If binder is a literal you can inline this
 	 */
+		#if !android
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length)
-		{
-			if (i == NONE)
-				copyKeys.remove(i);
+		for (i in 0...copyKeys.length) {
+			if(i == NONE) copyKeys.remove(i);
 		}
 
 		#if (haxe >= "4.0.0")
@@ -595,17 +638,11 @@ class Controls extends FlxActionSet
 		#end
 	}
 
-	/**
-	 * Sets all actions that pertain to the binder to trigger when the supplied keys are used.
-	 * If binder is a literal you can inline this
-	 */
 	public function unbindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length)
-		{
-			if (i == NONE)
-				copyKeys.remove(i);
+		for (i in 0...copyKeys.length) {
+			if(i == NONE) copyKeys.remove(i);
 		}
 
 		#if (haxe >= "4.0.0")
@@ -614,6 +651,25 @@ class Controls extends FlxActionSet
 		forEachBound(control, function(action, _) removeKeys(action, copyKeys));
 		#end
 	}
+	#else
+	public function bindKeys(control:Control, keys:Array<FlxKey>)
+	{
+		#if (haxe >= "4.0.0")
+		inline forEachBound(control, (action, state) -> addKeys(action, keys, state));
+		#else
+		forEachBound(control, function(action, state) addKeys(action, keys, state));
+		#end	
+	}
+
+	public function unbindKeys(control:Control, keys:Array<FlxKey>)
+	{
+		#if (haxe >= "4.0.0")
+		inline forEachBound(control, (action, _) -> removeKeys(action, keys));
+		#else
+		forEachBound(control, function(action, _) removeKeys(action, keys));
+		#end		
+	}	
+	#end
 
 	inline static function addKeys(action:FlxActionDigital, keys:Array<FlxKey>, state:FlxInputState)
 	{
