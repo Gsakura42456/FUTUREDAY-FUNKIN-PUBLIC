@@ -875,6 +875,11 @@ class PlayState extends MusicBeatState
 		GarbageCollector.run(true);
 
 		scripts.executeAllFunc("createPost");
+
+		#if mobile
+		addMobileControls();
+		mobileControls.visible = true;
+		#end
 	}
 
 	function set_songSpeed(value:Float):Float
