@@ -403,9 +403,9 @@ public function addButtonUI(action:FlxActionDigital, button:FlxButton, state:Flx
 
 public function setHitBox(Hitbox:FlxHitbox)
 {
-	inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, Hitbox.buttons[1], state));
-	inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, Hitbox.buttons[0], state));
-	inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, Hitbox.buttons[2], state));
+	inline forEachBound(Control.NOTE_UP, (action, state) -> addButtonNOTES(action, Hitbox.buttons[2], state));
+	inline forEachBound(Control.NOTE_DOWN, (action, state) -> addButtonNOTES(action, Hitbox.buttons[1], state));
+	inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, Hitbox.buttons[0], state));
 	inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, Hitbox.buttons[3], state));
 }
 
