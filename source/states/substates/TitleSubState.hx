@@ -105,6 +105,25 @@ class TitleSubState extends MusicBeatSubstate
 
 		if (downP && !doingAnim) changeSelection(1);
 
+		// shit codes uh
+		if (!doingAnim)
+		{
+		var mB = -1;
+		
+		for (item in grpMenuShit.members)
+			{
+				if (FlxG.mouse.overlaps(item, TitleState.mainCam))
+				{
+					mB = item.ID;
+					break;
+				}
+			}
+			
+		if (mB >=0 && FlxG.mouse.justPressed)
+		accepted = true;
+		
+		}
+
 		// add mouse stuff in the hotfix
 
 		if (controls.BACK && !doingAnim) {
